@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header Section -->
+ 
     <header>
         <h1>EcoFriendly Marketplace</h1>
         <nav>
@@ -15,14 +15,13 @@
         </nav>
     </header>
 
-    <!-- Checkout Section -->
     <section class="checkout-section">
         <h2>Your Cart</h2>
         <div id="cart-items"></div>
         
         <div class="total" id="total-price"></div>
 
-        <!-- Shipping Information Form -->
+       
         <h3>Shipping Information</h3>
         <form id="checkout-form" action="#" method="post" onsubmit="completePurchase(event)">
             <label for="address">Shipping Address</label>
@@ -31,23 +30,23 @@
             <label for="payment">Payment Method</label>
             <select id="payment" name="payment" required>
                 <option value="credit">Credit Card</option>
-                <option value="paypal">PayPal</option>
+                <option value="paypal">UPI</option>
+                <option value="COD">COD</option>
             </select>
 
             <button type="submit" class="btn">Complete Purchase</button>
         </form>
-        
-        <!-- Confirmation Message -->
+       
         <div id="confirmation-message" class="confirmation-message"></div>
     </section>
 
     <script>
-        // Load cart items from localStorage
+        
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         function displayCart() {
             const cartItemsContainer = document.getElementById('cart-items');
-            cartItemsContainer.innerHTML = ""; // Clear previous items
+            cartItemsContainer.innerHTML = "";
 
             let total = 0;
 
@@ -68,18 +67,17 @@
                 total += item.price;
             });
 
-            // Update total price
+          
             document.getElementById('total-price').textContent = "Total: ₹" + total;
         }
 
-        // Remove item from cart
+
         function removeItem(index) {
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
             displayCart();
         }
 
-        // Complete purchase function
         function completePurchase(event) {
             event.preventDefault();
 
@@ -91,12 +89,11 @@
             const address = document.getElementById('address').value;
             const paymentMethod = document.getElementById('payment').value;
 
-            // Display confirmation message
+
             const confirmationMessage = document.getElementById('confirmation-message');
             confirmationMessage.textContent = `Order Confirmed! Your items will be shipped to: ${address}. Payment method: ${paymentMethod}.`;
             confirmationMessage.style.display = 'block';
 
-            // Clear cart after purchase
             localStorage.removeItem('cart');
             cart = [];
             displayCart();
